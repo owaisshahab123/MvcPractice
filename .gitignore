@@ -1,3 +1,7 @@
 MvcPracticeApplication/Web.config
 MvcPracticeApplication/bin/
 MvcPracticeApplication/obj/
+ViewModel/obj/
+DAL/obj/
+BAL/obj/
+.vs/
