@@ -8,3 +8,4 @@ BAL/obj/
 BAL/bin/
 DAL/bin/
 ViewModel/bin/
+DAL/App.config
