@@ -1,4 +1,5 @@
-﻿using System;
+﻿using DAL.DBEntities;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -6,7 +7,28 @@ using System.Threading.Tasks;
 
 namespace ViewModel
 {
-    class VM
+    public class VM : ViewModel
     {
+        public class ChangePassword
+        {
+            public int UserID { get; set; }
+            public string CurrentPassword { get; set; }
+            public string NewPassword { get; set; }
+            public string ConfirmPassword { get; set; }
+        }
+
+        //public class GetRolesList
+        //{
+        //    public APIResponseHeader Header { get; set; }
+        //    public List<Roles> RolesList { get; set; }
+        //}
+
+        public class GetLoginResponse
+        {
+            public APIResponseHeader Header { get; set; }
+            public UserProfile User { get; set; }
+
+            public List<UserPermission> Permissions { get; set; }
+        }
     }
 }

@@ -5,3 +5,6 @@ ViewModel/obj/
 DAL/obj/
 BAL/obj/
 .vs/
+BAL/bin/
+DAL/bin/
+ViewModel/bin/

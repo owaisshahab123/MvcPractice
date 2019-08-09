@@ -47,6 +47,8 @@
     <Reference Include="System" />
     <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System.Core" />
+    <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="System.Security" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
@@ -58,12 +60,56 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Program.cs" />
+    <Compile Include="DBEntities\DBContext.cs" />
+    <Compile Include="DBEntities\Entity_Common.cs" />
+    <Compile Include="DBEntities\Mvc_Practice_DB.Context.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Mvc_Practice_DB.Context.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DBEntities\Mvc_Practice_DB.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Mvc_Practice_DB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DBEntities\Mvc_Practice_DB.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Mvc_Practice_DB.edmx</DependentUpon>
+    </Compile>
+    <Compile Include="DBEntities\UserPermission.cs">
+      <DependentUpon>Mvc_Practice_DB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DBEntities\UserProfile.cs">
+      <DependentUpon>Mvc_Practice_DB.tt</DependentUpon>
+    </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
+    <EntityDeploy Include="DBEntities\Mvc_Practice_DB.edmx">
+      <Generator>EntityModelCodeGenerator</Generator>
+      <LastGenOutput>Mvc_Practice_DB.Designer.cs</LastGenOutput>
+    </EntityDeploy>
+    <None Include="DBEntities\Mvc_Practice_DB.edmx.diagram">
+      <DependentUpon>Mvc_Practice_DB.edmx</DependentUpon>
+    </None>
     <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="DBEntities\Mvc_Practice_DB.Context.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>Mvc_Practice_DB.edmx</DependentUpon>
+      <LastGenOutput>Mvc_Practice_DB.Context.cs</LastGenOutput>
+    </Content>
+    <Content Include="DBEntities\Mvc_Practice_DB.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>Mvc_Practice_DB.edmx</DependentUpon>
+      <LastGenOutput>Mvc_Practice_DB.cs</LastGenOutput>
+    </Content>
+  </ItemGroup>
+  <ItemGroup>
+    <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
