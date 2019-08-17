@@ -17,12 +17,6 @@ namespace ViewModel
             public string ConfirmPassword { get; set; }
         }
 
-        //public class GetRolesList
-        //{
-        //    public APIResponseHeader Header { get; set; }
-        //    public List<Roles> RolesList { get; set; }
-        //}
-
         public class GetLoginResponse
         {
             public APIResponseHeader Header { get; set; }
@@ -30,5 +24,6 @@ namespace ViewModel
 
             public List<UserPermission> Permissions { get; set; }
         }
+
     }
 }

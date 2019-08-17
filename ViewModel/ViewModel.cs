@@ -37,5 +37,29 @@ namespace ViewModel
             public int Role_ID { get; set; }
             public string CreatedDate { get; set; }
         }
+
+        public partial class UserProfileCustom
+        {
+            public int ID { get; set; }
+            public Nullable<int> Role_ID { get; set; }
+            public Nullable<bool> IsActive { get; set; }
+            public string Fisrt_Name { get; set; }
+            public string Last_Name { get; set; }
+            public string User_ID { get; set; }
+            public string Password { get; set; }
+            public string Image { get; set; }
+            public Nullable<System.DateTime> Created_At { get; set; }
+            public Nullable<int> Created_By { get; set; }
+            public Nullable<System.DateTime> Updated_At { get; set; }
+            public Nullable<int> Updated_By { get; set; }
+            public Nullable<System.DateTime> Deleted_At { get; set; }
+            public Nullable<int> Deleted_By { get; set; }
+            public Nullable<bool> IsDleteted { get; set; }
+            public string ContactNumber { get; set; }
+            public string Email { get; set; }
+            public bool isWeb { get; set; }
+            public string DeviceToken { get; set; }
+            public string DeviceType { get; set; }
+        }
     }
 }
