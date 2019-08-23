@@ -86,7 +86,6 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="App.config" />
     <EntityDeploy Include="DBEntities\Mvc_Practice_DB.edmx">
       <Generator>EntityModelCodeGenerator</Generator>
       <LastGenOutput>Mvc_Practice_DB.Designer.cs</LastGenOutput>

@@ -1,0 +1,195 @@
+﻿@{
+    Layout = null;
+}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <title>Login</title>
+    <!-- Global stylesheets -->
+    <link href="https://fonts.googleapis.com/css?family=Roboto:400,300,100,500,700,900" rel="stylesheet" type="text/css">
+    <link href="~/global_assets/css/icons/icomoon/styles.css" rel="stylesheet" type="text/css">
+    <link href="~/assets/css/custom.css" rel="stylesheet" type="text/css">
+    <link href="~/assets/css/bootstrap.min.css" rel="stylesheet" type="text/css">
+    <link href="~/assets/css/bootstrap_limitless.min.css" rel="stylesheet" type="text/css">
+    <link href="~/assets/css/layout.min.css" rel="stylesheet" type="text/css">
+    <link href="~/assets/css/components.min.css" rel="stylesheet" type="text/css">
+    <link href="~/assets/css/colors.min.css" rel="stylesheet" type="text/css">
+    <link href="~/Content/SDTheme/validator.css" rel="stylesheet" />
+    <link href="~/Content/jquery.toast.css" rel="stylesheet" />
+
+    <!-- /global stylesheets -->
+    <style>
+    </style>
+    <!-- Core JS files -->
+    <script src="~/global_assets/js/main/jquery.min.js"></script>
+    <script src="~/global_assets/js/main/bootstrap.bundle.min.js"></script>
+    <script src="~/global_assets/js/plugins/loaders/blockui.min.js"></script>
+    <script src="~/Scripts/jquery.toast.js"></script>
+    <script src="~/global_assets/js/plugins/forms/styling/uniform.min.js"></script>
+    <script src="~/global_assets/js/plugins/forms/styling/switchery.min.js"></script>
+    <script src="~/global_assets/js/plugins/forms/styling/switch.min.js"></script>
+    <script src="~/Scripts/SDTheme/jquery.validator.js"></script>
+    <script src="~/Scripts/toastNotifications.js"></script>
+    <!-- /core JS files -->
+    <!-- Theme JS files -->
+    <script src="~/assets/js/app.js"></script>
+    <!-- /theme JS files -->
+    <!-- Cookies JS files -->
+    <script src="~/Scripts/jquery.cookie.js"></script>
+    <!-- /Cookies JS files -->
+
+</head>
+<body class="display-flex">
+    <div class="page-content">
+        <div class="login-background">
+            <!-- Main content -->
+            <div class="content-wrapper">
+                <!-- Content area -->
+                <div class="content d-flex resposive-center">
+                    <!-- Login form -->
+                    <form class="login-form" action="">
+                        <div class="card mb-0">
+                            <div class="card-body">
+                                <div class="text-center mb-3">
+                                    <h5 class="mb-0"></h5>
+                                </div>
+                                <div class="form-group form-group-feedback form-group-feedback-left">
+                                    <input type="text" id="txtUserID" validate="validate_login" email="Enter a valid email" require="*Please enter email." class="form-control" placeholder="Enter User Email here">
+                                    <div class="form-control-feedback">
+                                        <i class="icon-user text-muted"></i>
+                                    </div>
+                                </div>
+                                <div class="form-group form-group-feedback form-group-feedback-left mb-2">
+                                    <input type="password" id="txtPassword" validate="validate_login" require="*Please enter password." class="form-control" placeholder="Enter Password here">
+                                    <div class="form-control-feedback">
+                                        <i class="icon-lock2 text-muted"></i>
+                                    </div>
+                                </div>
+                                <div class="mb-3 form-check">
+                                    <input id="checkbox-1" class="form-check-input" name="checkbox-1" type="checkbox">
+                                    <label for="checkbox-1" class="form-check-labe">Remember me</label>
+                                </div>
+                                <div class="form-group">
+                                    <button type="button" id="btnLogin" class="btn btn-primary btn-block" onclick="Login();" formaction="index.html">
+                                        Login
+                                        <i id="LoadingGif" class="icon-circle-right2 ml-2"></i>
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+                    <!-- /login form -->
+                </div>
+            </div>
+            <!-- /main content -->
+        </div>
+    </div>
+    <!-- /page content -->
+</body>
+</html>
+<script type="text/javascript">
+
+    $(document).ready(function () {
+        //LoadCredentials();
+    });
+
+    $(document).keypress(function (event) {
+
+        var keycode = (event.keyCode ? event.keyCode : event.which);
+        if (keycode == '13') {
+            Login();
+            }
+    });
+
+
+    function Login() {
+
+        var urlcreate = "/Login/LoginValidate";
+
+        if (validate('validate_login') == false) {
+            AlertToast('error', 'Please Enter User Email and Password.');
+        }
+        else {
+
+            $('#btnLogin').text('Please wait...');
+            $("#btnLogin").prop("disabled", true);
+
+            $.ajax({
+                url: urlcreate,
+                data: '{uid: "' + $('#txtUserID').val() + '" ,pass: "' + $('#txtPassword').val() + '" }',
+                type: "POST",
+                contentType: "application/json;charset=utf-8",
+                dataType: "json",
+                success: function (result) {
+                    debugger;
+                    if (result.success) {
+                        RememberMe();
+                        window.location.href = document.location.origin + result.RedirectURL;
+                    }
+                    else {
+                        AlertToast('warning', 'Invalid Login Email OR Password.');
+
+                        $('#btnLogin').text('Login');
+                        $("#btnLogin").prop("disabled", false);
+                    }
+
+                },
+                error: function (errormessage) {
+                    $('#btnLogin').text('Login');
+                    $("#btnLogin").prop("disabled", false);
+                    AlertToast('warning', 'Exception Occured When Login');
+                },
+                failure: function (response) {
+                    $('#btnLogin').text('Login');
+                    $("#btnLogin").prop("disabled", false);
+                    AlertToast('warning', 'Exception Occured When Login');
+
+                }
+            });
+            return false;
+        }
+    }
+
+    function LoadCredentials() {
+        var remember = $.cookie('test_login_remember');
+        if (remember == 'true') {
+            var email = $.cookie('test_login_email');
+            var password = $.cookie('test_login_password');
+            // autofill the fields
+            $('#txtUserID').val(email);
+            $('#txtPassword').val(password);
+            $('#checkbox-1').prop("checked", true);
+        }
+    }
+    function RememberMe() {
+
+        //if ($('#exampleInputEmail1').val() != "" && $('#exampleInputPassword1').val() != "") {
+        if ($('#checkbox-1').prop("checked") == true) {
+            var email = $('#txtUserID').val();
+            var password = $('#txtPassword').val();
+
+            // reset cookies
+            $.cookie('test_login_email', null);
+            $.cookie('test_login_password', null);
+            $.cookie('test_login_remember', null);
+
+            // set cookies to expire in 14 days
+            $.cookie('test_login_email', email, { expires: 14 });
+            $.cookie('test_login_password', password, { expires: 14 });
+            $.cookie('test_login_remember', true, { expires: 14 });
+
+        }
+        else {
+            // reset cookies
+            $.cookie('test_login_email', null);
+            $.cookie('test_login_password', null);
+            $.cookie('test_login_remember', null);
+        }
+        //}
+    }
+
+</script>
