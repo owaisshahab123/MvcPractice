@@ -84,5 +84,11 @@ namespace MvcPracticeApplication.Controllers
             Session.Add("Session", null);
             return View("Index");
         }
+
+        public ActionResult test()
+        {
+
+            return View();
+        }
     }
 }

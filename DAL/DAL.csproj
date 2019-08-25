@@ -49,6 +49,7 @@
     <Reference Include="System.Core" />
     <Reference Include="System.Runtime.Serialization" />
     <Reference Include="System.Security" />
+    <Reference Include="System.Web.Mvc, Version=2.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
@@ -62,6 +63,21 @@
   <ItemGroup>
     <Compile Include="DBEntities\DBContext.cs" />
     <Compile Include="DBEntities\Entity_Common.cs" />
+    <Compile Include="DBEntities\MvcPractice.Context.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>MvcPractice.Context.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DBEntities\MvcPractice.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>MvcPractice.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DBEntities\MvcPractice.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>MvcPractice.edmx</DependentUpon>
+    </Compile>
     <Compile Include="DBEntities\Mvc_Practice_DB.Context.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -78,10 +94,10 @@
       <DependentUpon>Mvc_Practice_DB.edmx</DependentUpon>
     </Compile>
     <Compile Include="DBEntities\UserPermission.cs">
-      <DependentUpon>Mvc_Practice_DB.tt</DependentUpon>
+      <DependentUpon>MvcPractice.tt</DependentUpon>
     </Compile>
     <Compile Include="DBEntities\UserProfile.cs">
-      <DependentUpon>Mvc_Practice_DB.tt</DependentUpon>
+      <DependentUpon>MvcPractice.tt</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
@@ -90,12 +106,30 @@
       <Generator>EntityModelCodeGenerator</Generator>
       <LastGenOutput>Mvc_Practice_DB.Designer.cs</LastGenOutput>
     </EntityDeploy>
+    <None Include="App.config" />
+    <EntityDeploy Include="DBEntities\MvcPractice.edmx">
+      <Generator>EntityModelCodeGenerator</Generator>
+      <LastGenOutput>MvcPractice.Designer.cs</LastGenOutput>
+    </EntityDeploy>
+    <None Include="DBEntities\MvcPractice.edmx.diagram">
+      <DependentUpon>MvcPractice.edmx</DependentUpon>
+    </None>
     <None Include="DBEntities\Mvc_Practice_DB.edmx.diagram">
       <DependentUpon>Mvc_Practice_DB.edmx</DependentUpon>
     </None>
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="DBEntities\MvcPractice.Context.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>MvcPractice.edmx</DependentUpon>
+      <LastGenOutput>MvcPractice.Context.cs</LastGenOutput>
+    </Content>
+    <Content Include="DBEntities\MvcPractice.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>MvcPractice.edmx</DependentUpon>
+      <LastGenOutput>MvcPractice.cs</LastGenOutput>
+    </Content>
     <Content Include="DBEntities\Mvc_Practice_DB.Context.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
       <DependentUpon>Mvc_Practice_DB.edmx</DependentUpon>

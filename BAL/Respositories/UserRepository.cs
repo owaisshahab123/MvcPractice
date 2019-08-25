@@ -18,9 +18,9 @@ using ViewModel.Model;
 
 namespace BAL.Respositories
 {
-    class UserRepository : BaseRepository
+    public class UserRepository : BaseRepository
     {
-        public static string connectionString = ConfigurationManager.AppSettings["MVC_Practice"].ToString();
+        public static string connectionString = ConfigurationManager.AppSettings["cs_MvcPractice"].ToString();
 
         public UserRepository()
     : base()
@@ -28,7 +28,7 @@ namespace BAL.Respositories
 
         }
 
-        public UserRepository(MVC_PracticeEntities ContextDB)
+        public UserRepository(MvcPracticeEntities ContextDB)
     : base(ContextDB)
         {
 

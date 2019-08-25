@@ -77,6 +77,10 @@
       <Private>True</Private>
     </Reference>
     <Reference Include="Microsoft.CSharp" />
+    <Reference Include="Newtonsoft.Json, Version=12.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <HintPath>..\packages\Newtonsoft.Json.12.0.2\lib\net45\Newtonsoft.Json.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Data" />
     <Reference Include="System.Drawing" />
@@ -140,9 +144,6 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Reference Include="Newtonsoft.Json">
-      <HintPath>..\packages\Newtonsoft.Json.6.0.4\lib\net45\Newtonsoft.Json.dll</HintPath>
-    </Reference>
     <Reference Include="EntityFramework">
       <HintPath>..\packages\EntityFramework.6.1.3\lib\net45\EntityFramework.dll</HintPath>
     </Reference>
@@ -319,31 +320,6 @@
     <Content Include="Content\morris.css" />
     <Content Include="Content\multi-select.css" />
     <Content Include="Content\nouislider.min.css" />
-    <Content Include="Content\SDImage\caravatar.png" />
-    <Content Include="Content\SDImage\D.png" />
-    <Content Include="Content\SDImage\end-destination.png" />
-    <Content Include="Content\SDImage\img-circle.png" />
-    <Content Include="Content\SDImage\img-main-bg.jpg" />
-    <Content Include="Content\SDImage\img-mastercard.png" />
-    <Content Include="Content\SDImage\img-user.png" />
-    <Content Include="Content\SDImage\img-user2.png" />
-    <Content Include="Content\SDImage\img-visa.png" />
-    <Content Include="Content\SDImage\L.png" />
-    <Content Include="Content\SDImage\loading.gif" />
-    <Content Include="Content\SDImage\logo.png" />
-    <Content Include="Content\SDImage\logo_old.png" />
-    <Content Include="Content\SDImage\S.png" />
-    <Content Include="Content\SDImage\signature.jpg" />
-    <Content Include="Content\SDImage\T.png" />
-    <Content Include="Content\SDImage\trusted-instructor.png" />
-    <Content Include="Content\SDImage\trusted-learner.png" />
-    <Content Include="Content\SDImage\trusted-supervisor.png" />
-    <Content Include="Content\SDImage\upload-img.png" />
-    <Content Include="Content\SDImage\vehicle.png" />
-    <Content Include="Content\SDTheme\font-awesome.min.css" />
-    <Content Include="Content\SDTheme\owl.carousel.css" />
-    <Content Include="Content\SDTheme\owl.theme.css" />
-    <Content Include="Content\SDTheme\validator.css" />
     <Content Include="Content\select2.css" />
     <Content Include="Content\tooplate-style.css" />
     <Content Include="favicon.ico" />
@@ -831,13 +807,6 @@
     <Content Include="Scripts\print.min.js" />
     <Content Include="Scripts\respond.js" />
     <Content Include="Scripts\respond.min.js" />
-    <Content Include="Scripts\SDTheme\jquery-2.1.1.min.js" />
-    <Content Include="Scripts\SDTheme\jquery.cookie.js" />
-    <Content Include="Scripts\SDTheme\jquery.geocomplete.js" />
-    <Content Include="Scripts\SDTheme\jquery.mask.js" />
-    <Content Include="Scripts\SDTheme\jquery.validator.js" />
-    <Content Include="Scripts\SDTheme\moment-with-locales.js" />
-    <Content Include="Scripts\SDTheme\owl.carousel.js" />
     <Content Include="Scripts\toastNotifications.js" />
     <Content Include="Scripts\umd\popper-utils.js" />
     <Content Include="Scripts\umd\popper-utils.min.js" />
@@ -917,6 +886,7 @@
     <Content Include="Scripts\umd\popper-utils.min.js.map" />
     <Content Include="Scripts\umd\popper.js.map" />
     <Content Include="Scripts\umd\popper.min.js.map" />
+    <Content Include="Views\Login\test.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

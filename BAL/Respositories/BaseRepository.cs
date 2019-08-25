@@ -9,14 +9,14 @@ namespace BAL.Respositories
 {
     public class BaseRepository
     {
-        public MVC_PracticeEntities DBContext;
+        public MvcPracticeEntities DBContext;
 
         public BaseRepository()
         {
-            DBContext = new MVC_PracticeEntities();
+            DBContext = new MvcPracticeEntities();
         }
 
-        public BaseRepository(MVC_PracticeEntities ContextDB)
+        public BaseRepository(MvcPracticeEntities ContextDB)
         {
             DBContext = ContextDB;
             DBContext.Configuration.LazyLoadingEnabled = false;

@@ -15,8 +15,9 @@ namespace DAL.DBEntities
     public partial class UserPermission
     {
         public int ID { get; set; }
-        public string PageTitle { get; set; }
+        public string PageName { get; set; }
         public string PageURL { get; set; }
+        public Nullable<int> Order { get; set; }
         public string Controller { get; set; }
         public int Role { get; set; }
         public Nullable<bool> IsActive { get; set; }
@@ -26,5 +27,6 @@ namespace DAL.DBEntities
         public Nullable<int> UpdatedBy { get; set; }
         public Nullable<System.DateTime> DeletedDate { get; set; }
         public Nullable<int> DeletedBy { get; set; }
+        public Nullable<int> UserID { get; set; }
     }
 }

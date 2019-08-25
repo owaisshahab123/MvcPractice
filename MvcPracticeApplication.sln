@@ -11,6 +11,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DAL", "DAL\DAL.csproj", "{A
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ViewModel", "ViewModel\ViewModel.csproj", "{6B8B8500-AE7E-42BE-B475-76681E3AA94B}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MvcApiApplication", "MvcApiApplication\MvcApiApplication.csproj", "{F1FF6D3C-A7C6-42F4-8A3B-0412D5B02D78}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -33,6 +35,10 @@ Global
 		{6B8B8500-AE7E-42BE-B475-76681E3AA94B}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{6B8B8500-AE7E-42BE-B475-76681E3AA94B}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{6B8B8500-AE7E-42BE-B475-76681E3AA94B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F1FF6D3C-A7C6-42F4-8A3B-0412D5B02D78}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F1FF6D3C-A7C6-42F4-8A3B-0412D5B02D78}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F1FF6D3C-A7C6-42F4-8A3B-0412D5B02D78}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F1FF6D3C-A7C6-42F4-8A3B-0412D5B02D78}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

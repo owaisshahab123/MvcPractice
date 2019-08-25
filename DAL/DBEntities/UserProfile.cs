@@ -31,5 +31,7 @@ namespace DAL.DBEntities
         public Nullable<bool> IsDleteted { get; set; }
         public string ContactNumber { get; set; }
         public string Email { get; set; }
+        public string DeviceToken { get; set; }
+        public string DeviceType { get; set; }
     }
 }
