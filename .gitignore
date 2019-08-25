@@ -9,3 +9,5 @@ BAL/bin/
 DAL/bin/
 ViewModel/bin/
 DAL/App.config
+MvcApiApplication/bin/
+MvcApiApplication/obj/
