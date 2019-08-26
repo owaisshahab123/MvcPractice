@@ -90,5 +90,11 @@ namespace MvcPracticeApplication.Controllers
 
             return View();
         }
+
+        public ActionResult destiny()
+        {
+
+            return View();
+        }
     }
 }

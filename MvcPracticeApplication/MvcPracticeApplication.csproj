@@ -322,6 +322,7 @@
     <Content Include="Content\nouislider.min.css" />
     <Content Include="Content\select2.css" />
     <Content Include="Content\tooplate-style.css" />
+    <Content Include="DB_Scripts\script_260819.sql" />
     <Content Include="favicon.ico" />
     <Content Include="fonts\fontawesome-webfont.svg" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
@@ -887,6 +888,7 @@
     <Content Include="Scripts\umd\popper.js.map" />
     <Content Include="Scripts\umd\popper.min.js.map" />
     <Content Include="Views\Login\test.cshtml" />
+    <Content Include="Views\Login\destiny.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
