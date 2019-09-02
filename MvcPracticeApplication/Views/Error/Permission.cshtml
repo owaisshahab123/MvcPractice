@@ -1,0 +1,73 @@
+﻿@{ Layout = null; }
+<html>
+<head>
+    <title></title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- Bootstrap -->
+    <link rel="stylesheet" href="~/Content/bootstrap.css" />
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="~/Content/font-awesome.min.css" />
+    <!-- font maven pro -->
+    <link href="https://fonts.googleapis.com/css?family=Maven+Pro:400,500,700,900" rel="stylesheet">
+    <!-- Main css -->
+    <link rel="stylesheet" href="~/Content/SGSTheme/style.css" />
+
+    <style>
+        .cntent-ot-found {
+            font-size: 300px;
+            color: #545152;
+        }
+
+        .img_crcle {
+            width: 300px;
+        }
+
+        .not-found {
+            display: block;
+            font-size: 80px;
+            font-weight: 500;
+            color: #2c292a;
+        }
+    </style>
+</head>
+
+<body>
+
+
+    <div class="container text-center">
+        <p class="cntent-ot-found">
+            404
+            <span class="not-found">
+                <br>
+                Page Not Found
+            </span>
+        </p>
+    </div><!-- End container -->
+    <!-- jquery-3.2.1 -->
+
+    <script src="~/Scripts/jquery-3.2.1.min.js"></script>
+    <!-- jquery-2.1.4 -->
+    <!-- <script src="assets/js/jQuery-2.1.4.min.js"></script> -->
+    <!-- Bootstrap 3.3.7 -->
+
+    <script src="~/Scripts/bootstrap.min.js"></script>
+
+    <script>
+		function readURL(input) {
+			if (input.files && input.files[0]) {
+				var reader = new FileReader();
+
+				reader.onload = function (e) {
+					$('#blah')
+					.attr('src', e.target.result);
+				};
+
+				reader.readAsDataURL(input.files[0]);
+			};
+		};
+    </script>
+
+</body>
+
+</html>

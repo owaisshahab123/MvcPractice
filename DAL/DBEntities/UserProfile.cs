@@ -17,9 +17,9 @@ namespace DAL.DBEntities
         public int ID { get; set; }
         public Nullable<int> Role_ID { get; set; }
         public Nullable<bool> IsActive { get; set; }
-        public string Fisrt_Name { get; set; }
+        public string First_Name { get; set; }
         public string Last_Name { get; set; }
-        public string User_ID { get; set; }
+        public string EmailAddress { get; set; }
         public string Password { get; set; }
         public string Image { get; set; }
         public Nullable<System.DateTime> Created_At { get; set; }
@@ -33,5 +33,8 @@ namespace DAL.DBEntities
         public string Email { get; set; }
         public string DeviceToken { get; set; }
         public string DeviceType { get; set; }
+        public Nullable<int> Class { get; set; }
+        public Nullable<System.DateTime> DOB { get; set; }
+        public string FatherGuardians { get; set; }
     }
 }

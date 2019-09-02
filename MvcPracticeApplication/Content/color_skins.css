@@ -7,7 +7,7 @@
 }
 
 .theme-purple .btn-primary {
-    background: #6572b8;
+    background: skyblue;
 }
 
     .theme-purple .btn-primary:active, .theme-purple .btn-primary:hover, .theme-purple .btn-primary:focus {
@@ -29,11 +29,11 @@
     }
 
 .theme-purple section.content:before {
-    background-color: #ed1c24;
+    background-color: skyblue;
 }
 
 .theme-purple .navbar, .theme-purple .page-loader-wrapper {
-    background: #ed1c24;
+    background: skyblue;
 }
 
 .theme-purple .bars {
@@ -504,7 +504,7 @@ ul.invoice_subtotl_ul {
 }
 
 .theme-purple .btn-primary {
-    background: #ed1c24;
+    background: skyblue;
 }
 
     .theme-purple .btn-primary:active, .theme-purple .btn-primary:hover, .theme-purple .btn-primary:focus {

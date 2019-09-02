@@ -42,7 +42,7 @@ namespace MvcPracticeApplication.Controllers
                 string url = "";
 
                 UserProfileCustom profile = new UserProfileCustom();
-                profile.User_ID = uid;
+                profile.EmailAddress = uid;
                 profile.Password = pass;
                 profile.isWeb = true;
 
@@ -60,7 +60,7 @@ namespace MvcPracticeApplication.Controllers
                     Session.Timeout = 600;
                     if (loginRes.User.Role_ID == Common.SuperAdmin_ID())
                     {
-                        url = "/User/DashBoard";
+                        url = "/User/UserEntry";
                     }
 
                     Session["UserID"] = loginRes.User.ID;

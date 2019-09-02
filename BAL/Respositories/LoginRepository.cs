@@ -38,7 +38,7 @@ namespace BAL.Respositories
             //ErrorHandling.WriteError("DBContext:"+ DBContext.Database.Connection.ConnectionString);
             // int contrID = vt_Common.Contractor_ID();
             var password = Common.Encrypt(pass);
-            return DBContext.UserProfiles.Where(x => x.IsActive == true && x.Deleted_At == null && x.Fisrt_Name.Trim().ToLower().Replace(" ", "") == UName.Trim().ToLower().Replace(" ", "") && x.Password == password && x.Role_ID == roleid).FirstOrDefault();
+            return DBContext.UserProfiles.Where(x => x.IsActive == true && x.Deleted_At == null && x.First_Name.Trim().ToLower().Replace(" ", "") == UName.Trim().ToLower().Replace(" ", "") && x.Password == password && x.Role_ID == roleid).FirstOrDefault();
         }
         public UserProfile GetUserEngProfileByRoleID(string Email, string pass, int roleid)
         {
@@ -51,14 +51,14 @@ namespace BAL.Respositories
         {
             //var abc = DBContext.vt_UserPermissions.Where(x => x.UserID == UserID).ToList();
 
-            if (RoleID == 1)
-            {
-                return DBContext.UserPermissions.Where(x => x.ID == UserID).ToList();
-            }
-            else
-            {
+            //if ()
+            //{
+            //    return DBContext.UserPermissions.Where(x => x.ID == UserID).ToList();
+            //}
+
+
                 return DBContext.UserPermissions.Where(x => x.Role == RoleID).ToList();
-            }
+
 
         }
     }

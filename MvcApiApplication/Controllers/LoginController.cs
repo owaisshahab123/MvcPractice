@@ -28,7 +28,7 @@ namespace MvcApiApplication.Controllers
         [HttpPost]
         public GetLoginResponse ValidateLogin(UserProfileCustom User)
         {
-            var data = Common.Encrypt(User.User_ID);
+            var data = Common.Encrypt(User.EmailAddress);
 
 
             GetLoginResponse Response = new GetLoginResponse();
@@ -36,7 +36,7 @@ namespace MvcApiApplication.Controllers
             APIResponseHeader Header = new APIResponseHeader();
             try
             {
-                var user = loginrepo.GetUserProfile(User.User_ID, User.Password);
+                var user = loginrepo.GetUserProfile(User.EmailAddress, User.Password);
 
                 if (user != null)
                 {
@@ -109,7 +109,7 @@ namespace MvcApiApplication.Controllers
             APIResponseHeader Header = new APIResponseHeader();
             try
             {
-                var user = loginrepo.UserByID(Convert.ToInt32(User.User_ID));
+                var user = loginrepo.UserByID(Convert.ToInt32(User.EmailAddress));
                 if (user != null)
                 {
                     Header.IsSuccess = true;

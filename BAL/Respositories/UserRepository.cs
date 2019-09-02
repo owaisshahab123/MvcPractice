@@ -34,5 +34,55 @@ namespace BAL.Respositories
 
             DBContext = ContextDB;
         }
+
+        public void InsertError(string page, string ErrorType, string Error, string StackTrace, string LoginUser)
+        {
+            SqlParameter[] Pram = {
+                 //new SqlParameter("@ID",SPT.ID)
+                 new SqlParameter("@Page",page)
+                ,new SqlParameter("@ErrorType",ErrorType)
+                ,new SqlParameter("@Error",Error)
+                ,new SqlParameter("@Stack_Trace",StackTrace)
+                ,new SqlParameter("@LoginUser",LoginUser)
+            };
+
+            var AssignTask_ID = Entity_Common.get_Scalar(DBContext, "insert_error_logs", Pram);
+
+        }
+
+        public UserProfile AddNewUserEntry(UserProfile userProfile)
+        {
+            if (userProfile.ID == 0)
+            {
+                userProfile.Created_At = Common.GetCurrentDateTime();
+                if (userProfile.IsActive == null) { userProfile.IsActive = true; }
+                DBContext.Entry(userProfile).State = EntityState.Added;
+                DBContext.SaveChanges();
+                return userProfile;
+            }
+            else
+            {
+                var reg = DBContext.UserProfiles.Where(x => x.ID == userProfile.ID).FirstOrDefault();
+                reg.Updated_At = Common.GetCurrentDateTime();
+                if (userProfile.IsActive == null) { reg.IsActive = true; } else { reg.IsActive = userProfile.IsActive; }
+                reg.Updated_By = userProfile.Updated_By;
+                reg.First_Name = userProfile.First_Name;
+                reg.Last_Name = userProfile.Last_Name;
+                reg.FatherGuardians = userProfile.FatherGuardians;
+                reg.Class = userProfile.Class;
+                reg.DOB = userProfile.DOB;
+                reg.ContactNumber = userProfile.ContactNumber;
+                DBContext.UserProfiles.Attach(reg);
+                DBContext.UpdateOnly<UserProfileCustom>(reg, x => x.First_Name, x => x.Last_Name, x => x.ContactNo, x => x.DOB, x => x.Class, x => x.FatherGuardian);
+                DBContext.SaveChanges();
+                return reg;
+            }
+        }
+
+        public List<SchoolClass> GetAllClasses()
+        {
+            return DBContext.SchoolClasses.Where(x => x.IsActive == true && (x.IsDeleted == false || x.IsDeleted == null)).ToList();
+        }
+
     }
 }

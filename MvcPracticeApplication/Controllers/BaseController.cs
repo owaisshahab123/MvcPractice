@@ -46,11 +46,6 @@ namespace MvcPracticeApplication.Controllers
                 {
                     var Allow = sess.pagelist.Where(x => x.PageURL.ToString().Trim().ToLower() == (currentController + "/" + currentAction).ToString().Trim().ToLower()).FirstOrDefault();
 
-                    if (Allow != null)
-                    {
-                        Allow = null;
-                    }
-
                     System.Web.HttpContext.Current.Session["Session"] = sess;
 
                     if (Allow == null)

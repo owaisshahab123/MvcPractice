@@ -1,0 +1,192 @@
+﻿
+@{
+    ViewBag.Title = "UserEntry";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+
+@*always call this first*@
+
+<script src="~/Scripts/CommonList.js"></script>
+
+<!-- Content area -->
+
+<div class="block-header">
+
+</div>
+
+<div class="container-fluid">
+    <!-- Exportable Table -->
+    <div class="row clearfix">
+        <div class="col-lg-12">
+            <div class="card">
+                <div class="header">
+                    <form id="SaveUpdateForm" onsubmit="return false">
+                        <div class="row" style="display:none">
+                            <input id="ClassID" name="ClassID" />
+                        </div>
+                        <div class="body">
+                            <div class="row clearfix">
+                                <div class="col-lg-6 col-md-6" style="display:none">
+                                    <div class="form-group">
+                                        <label><b>ID</b></label>
+                                        <input type="number" id="ID" name="ID" class="form-control" placeholder="id">
+                                    </div>
+                                </div>
+                                <div class="col-lg-6 col-md-6">
+                                    <div class="form-group">
+                                        <label><b>First Name:</b></label>
+                                        <input type="text" id="First_Name" validate="validate_data" require="*Please enter First Name" name="First_Name" class="form-control" placeholder="First Name">
+                                    </div>
+                                </div>
+                                <div class="col-lg-6 col-md-6">
+                                    <div class="form-group">
+                                        <label><b>Last Name:</b></label>
+                                        <input type="text" id="Last_Name" validate="validate_data" require="*Please enter Last Name" name="Last_Name" class="form-control" placeholder="Last Name">
+                                    </div>
+                                </div>
+                                <div class="col-lg-6 col-md-6">
+                                    <div class="form-group">
+                                        <label><b>Date Of Birth:</b></label>
+                                        <input type="text" id="DOB" validate="validate_data" require="*Please enter Date of Birth" name="DOB" class="form-control" placeholder="Date of Birth">
+                                    </div>
+                                </div>
+                                <div class="col-lg-6 col-md-6">
+                                    <div class="form-group">
+                                        <label><b>Class:</b></label>
+                                        <div id="Classes" class="cstm-form-control"></div>
+                                    </div>
+                                </div>
+                                <div class="col-lg-6 col-md-6">
+                                    <div class="form-group">
+                                        <label><b>Father Name / Guardians:</b></label>
+                                        <input type="text" id="FatherGuardian" validate="validate_data" require="*Please enter Father/Guardian" name="FatherGuardian" class="form-control" placeholder="Father/Guardian">
+                                    </div>
+                                </div>
+                                <div class="col-lg-6 col-md-6">
+                                    <div class="form-group">
+                                        <label><b>Contact No:</b></label>
+                                        <input type="text" id="ContactNo" validate="validate_data" require="*Please enter Contact Number" name="ContactNo" class="form-control" placeholder="Contact Number">
+                                    </div>
+                                </div>
+                                <div class="col-lg-6 col-md-6">
+                                    <div class="form-group">
+                                        <label><b>Email Address:</b></label>
+                                        <input type="text" id="EmailAddress" validate="validate_data" require="*Please enter Email Address" name="EmailAddress" class="form-control" placeholder="Email Address">
+                                    </div>
+                                </div>
+                                <div class="col-lg-6 col-md-6">
+                                    <div class="form-group">
+                                        <label><b>Password:</b></label>
+                                        <input type="password" id="Password" validate="validate_data" require="*Please enter Password" name="Password" class="form-control" placeholder="Password">
+                                    </div>
+                                </div>
+                                <button type="submit" id="SaveData" class="btn btn-primary">Submit<i class="ml-2"></i></button>
+                            </div>
+                        </div>
+                    </form>
+            <!-- ks -->
+        </div>
+    </div>
+</div>
+        </div>
+    </div>
+
+
+
+
+
+<script>
+
+    $(document).ready(function () {
+        ClassesDropdown(0);
+    })
+
+    $("#SaveUpdateForm").on("submit", function (event) {
+        debugger;
+        event.preventDefault();
+        if (validate('validate_data') == false) {
+            AlertToast('warning', 'Please Enter Required Field(s).');
+        }
+        else {
+
+            $('#SaveData').attr('disabled', 'disabled');
+            var FormData = $(this).serialize();
+            FormData = FormData;
+            $.ajax({
+                type: 'POST',
+                url: 'CreateAndModifyUserEntry',
+                data: FormData,
+                success: function (response) {
+
+                    if (response.Success) {
+
+                        AlertToast('success', 'Data Added Successfully');
+                        //window.location.href = '/User/';
+                    }
+                    else {
+                        AlertToast('warning', response.Message);
+                    }
+                },
+                failure: function (response) {
+                    alert("Fail");
+                },
+                error: function (response) {
+                    alert("Error");
+                },
+                complete: function () {
+                    $('#SaveData').removeAttr('disabled');
+                }
+
+            });
+
+        }
+    });
+
+    function ClassesDropdown(selectedval) {
+        debugger;
+        var ClassesList = GetAllClasses()
+        var selecteditem;
+        if (ClassesList != null) {
+            var selecteditem = ClassesList.ID = selectedval;
+            if (ClassesList.length == 1) {
+                selecteditem = selectedval = ClassesList[0].ID;
+                $('#Regionshide').val(selecteditem);
+
+            } else {
+                selecteditem = 0;
+                if (selectedval != 0) {
+                    selecteditem = selectedval;
+                }
+            }
+
+            $("#Classes").dxSelectBox({
+                items: ClassesList,
+                displayExpr: "ClassName",
+                valueExpr: "ID",
+                placeholder: "Select Class...",
+                cssclass: "form-control frm-cstm",
+                searchEnabled: true,
+                value: selecteditem,
+                onValueChanged: function (data) {
+
+                    if (data.value != null) {
+                        $('#ClassID').val(data.value);
+                    }
+                },
+
+            });
+        }
+    }
+
+
+
+    function allowNumbersOnly(e) {
+        var code = (e.which) ? e.which : e.keyCode;
+        if (code > 31 && (code < 48 || code > 57)) {
+            e.preventDefault();
+        }
+    }
+
+
+</script>

@@ -25,6 +25,8 @@ namespace DAL.DBEntities
             throw new UnintentionalCodeFirstException();
         }
     
+        public virtual DbSet<Role> Roles { get; set; }
+        public virtual DbSet<SchoolClass> SchoolClasses { get; set; }
         public virtual DbSet<UserPermission> UserPermissions { get; set; }
         public virtual DbSet<UserProfile> UserProfiles { get; set; }
     }

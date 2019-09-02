@@ -1,44 +1,312 @@
-﻿<!DOCTYPE html>
+﻿@{
+    ViewModel.Model.Session sess = new ViewModel.Model.Session();
+    sess = (ViewModel.Model.Session)HttpContext.Current.Session["Session"];
+    var value = TempData["IsLogin"];
+
+
+}
+
+<!DOCTYPE html>
 <html>
 <head>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>@ViewBag.Title - My ASP.NET Application</title>
-    @Styles.Render("~/Content/css")
-    @Scripts.Render("~/bundles/modernizr")
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <title>School Management System</title>
+
+    <!-- Style Sheets -->
+    <link href="~/global_assets/css/icons/fontawesome/styles.min.css" rel="stylesheet" />
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.7.0/animate.css" rel="stylesheet" />
+    <link href="~/Content/dx.spa.css" rel="stylesheet" />
+    <link href="~/Content/dx.common.css" rel="stylesheet" />
+    <link href="~/Content/dx.light.css" rel="stylesheet" />
+    <link href="~/Content/bootstrap-colorpicker.css" rel="stylesheet" />
+    <link href="~/Content/CSS_NEW/bootstrap-select.css" rel="stylesheet" />
+    <link href="~/Content/CSS_NEW/bootstrap.min.css" rel="stylesheet" />
+    <link href="~/Content/CSS_NEW/color_skins.css" rel="stylesheet" />
+    <link href="~/Content/CSS_NEW/morris.css" rel="stylesheet" />
+    <link href="~/Content/CSS_NEW/multi-select.css" rel="stylesheet" />
+    <link href="~/Content/CSS_NEW/nouislider.min.css" rel="stylesheet" />
+    <link href="~/Content/CSS_NEW/select2.css" rel="stylesheet" />
+    <link href="~/global_assets/css/icons/icomoon/styles.css" rel="stylesheet" type="text/css">
+    <link href="~/Content/CSS_NEW/main.css" rel="stylesheet" />
+    <link href="~/Content/validator.css" rel="stylesheet" />
+    <link href="~/Content/jquery.toast.css" rel="stylesheet" />
+    <!-- /Style Sheets -->
+
+    <!-- Jquery Core Js -->
+    <script src="~/Scripts/jquery-2.1.1.min.js"></script>
+    @*<script src="~/global_assets/GLOBAL_ASSETS_NEW/inner_assets/bundles/libscripts.bundle.js"></script*@> <!-- Lib Scripts Plugin Js -->
+    <script src="~/global_assets/GLOBAL_ASSETS_NEW/inner_assets/bundles/vendorscripts.bundle.js"></script> <!-- Lib Scripts Plugin Js -->
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+    <script src="~/global_assets/GLOBAL_ASSETS_NEW/assets/plugins/bootstrap-colorpicker/js/bootstrap-colorpicker.js"></script> <!-- Bootstrap Colorpicker Js -->
+    <script src="~/global_assets/GLOBAL_ASSETS_NEW/assets/plugins/jquery-inputmask/jquery.inputmask.bundle.js"></script> <!-- Input Mask Plugin Js -->
+    <script src="~/global_assets/GLOBAL_ASSETS_NEW/assets/plugins/multi-select/js/jquery.multi-select.js"></script> <!-- Multi Select Plugin Js -->
+    <script src="~/global_assets/GLOBAL_ASSETS_NEW/assets/plugins/jquery-spinner/js/jquery.spinner.js"></script> <!-- Jquery Spinner Plugin Js -->
+    <script src="~/global_assets/GLOBAL_ASSETS_NEW/assets/plugins/bootstrap-tagsinput/bootstrap-tagsinput.js"></script> <!-- Bootstrap Tags Input Plugin Js -->
+    <script src="~/global_assets/GLOBAL_ASSETS_NEW/assets/plugins/select2/select2.min.js"></script> <!-- Select2 Js -->
+    <script src="~/global_assets/GLOBAL_ASSETS_NEW/inner_assets/bundles/mainscripts.bundle.js"></script><!-- Custom Js -->
+    <script src="~/Scripts/jquery.toast.js"></script>
+    <script src="~/Scripts/jquery.validator.js"></script>
+    <script src="~/Scripts/toastNotifications.js"></script>
+
+    <!-- Devextreme JS files -->
+    <script src="~/Scripts/moment.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.1.2/jszip.min.js"></script>
+    <script src="~/Scripts/dx.all.js"></script>
+    <script src="~/Scripts/jszip.js"></script>
 
 </head>
-<body>
-    <div class="navbar navbar-inverse navbar-fixed-top">
-        <div class="container">
-            <div class="navbar-header">
-                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                </button>
-                @Html.ActionLink("Application name", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })
-            </div>
-            <div class="navbar-collapse collapse">
-                <ul class="nav navbar-nav">
-                    <li>@Html.ActionLink("Home", "Index", "Home")</li>
-                    <li>@Html.ActionLink("About", "About", "Home")</li>
-                    <li>@Html.ActionLink("Contact", "Contact", "Home")</li>
-                </ul>
-                @Html.Partial("_LoginPartial")
+<body class="theme-purple">
+    <!-- Page Loader -->
+    @*<div class="page-loader-wrapper">
+        <div class="loader">
+            <div class="m-t-30"><img class="zmdi-hc-spin" src="~/images/loader-logo.png" width="48" height="48" alt="Oreo"></div>
+            <p>Please wait...</p>
+        </div>
+    </div>*@
+
+    <div class="overlay"></div>
+    <!-- Top Bar -->
+    <nav class="navbar p-l-5 p-r-5">
+        <ul class="nav navbar-nav navbar-left">
+            <li><a href="javascript:void(0);" class="ls-toggle-btn" data-close="true"><i class="zmdi zmdi-swap"></i></a></li>
+            <li>
+                <div class="navbar-header">
+                    <a href="javascript:void(0);" class="bars"></a>
+                </div>
+            </li>
+
+
+            <ul class="navbar-nav pull-right flex-direction-none">
+ 
+                <li class="nav-item dropdown dropdown-user">
+                    <a href="#" class="navbar-nav-link d-flex align-items-center dropdown-toggle" data-toggle="dropdown">
+                        <img src="../global_assets/images/no-user.png" class="rounded-circle mr-2" height="34" alt="">
+
+                        @{
+                            if (sess != null)
+                            {
+                                <span style="color:white">...</span>
+                            }
+                        }
+                        <i class="cstm-icon-down"></i>
+                    </a>
+
+                    <div class="dropdown-menu dropdown-menu-right">
+                        @{
+                            if (sess != null)
+                            {
+                                if (sess.SessionUser.Role_ID == 1)
+                                {
+                                    <a data-toggle='modal' href='#myModalChangePassword' class="dropdown-item"><i class="icon-cog5"></i> Change Password</a>
+
+                                }
+                                <a href="/Login/Logout" class="dropdown-item"><i class="icon-switch2"></i> Logout</a>
+                            }
+                        }
+
+                    </div>
+                </li>
+            </ul>
+        </ul>
+    </nav>
+
+    <!-- Left Sidebar -->
+    @*<aside id="leftsidebar" class="sidebar">
+        <div class="menu">
+            <ul class="list">
+
+                <li class="header"><p id="p_header"></p></li>
+
+
+                <li class="open nav-item nav-item-submenu">
+                    <a href="javascript:void(0);" class="menu-toggle nav-link"><i class="zmdi zmdi-apps"></i><span>Administrator</span> </a>
+                    <ul class="ml-menu nav nav-group-sub">
+
+                        @{
+                            if (sess != null)
+                            {
+                                if (sess.SessionUser.Role_ID == 1 && sess.SessionUser.ID == 1)
+                                {
+                                    <li class="nav-item"><a href="/user/test" class="nav-link">test Setup</a></li>
+                                    <li class="nav-item"><a href="/user/test" class="nav-link">test Setup 2</a></li>
+                                    <li class="nav-item"><a href="/user/test" class="nav-link">test Setup 3</a></li>
+
+                                }
+                            }
+                        }
+                    </ul>
+                </li>
+            </ul>
+        </div>
+    </aside>*@
+
+    <div id="myModalChangePassword" tabindex="-1" aria-modal="true" class="modal modal-adminpro-general default-popup-PrimaryModal  fade animated in" role="dialog">
+        <div class="modal-dialog modal-sm mt-0">
+            <div class="modal-content">
+                <div class="modal-body p-0">
+                    <div class="card mb-0">
+                        <div class="card-body pb-0">
+
+                            <h4 class="modal-title card-title">
+                                Change Password
+
+                            </h4>
+
+                            <hr />
+                            <form id="SaveUpdateFormChangePassword">
+                                <div class="row">
+                                    <div class="col-md-12">
+                                        <div class="form-group">
+                                            <label>Current Password:</label>
+                                            <input type="password" id="CurrentPassword" validate="validate_data_123" require="*Please Enter Current Password" name="Password" class="form-control" placeholder="Current Password">
+                                            <span toggle="#password-field" class="fa fa-fw fa-eye Passfield-icon toggle-password-current cstm-show-pass"></span>
+                                        </div>
+                                    </div>
+
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-12">
+                                        <div class="form-group">
+                                            <label>New Password:</label>
+                                            <input type="password" id="NewPassword" validate="validate_data_123" require="*Please Enter New Password" name="Password" class="form-control" placeholder="New Password">
+                                            <span toggle="#password-field" class="fa fa-fw fa-eye Passfield-icon toggle-password-new cstm-show-pass"></span>
+                                        </div>
+                                    </div>
+
+                                </div>
+
+                                <div class="row">
+                                    <div class="col-md-12">
+                                        <div class="form-group">
+                                            <label>Confirm Password:</label>
+                                            <input type="password" id="ConfirmPassword" validate="validate_data_123" require="*Please Enter Confirm Password" name="Password" class="form-control" placeholder="Confirm Password">
+                                            <span toggle="#password-field" class="fa fa-fw fa-eye Passfield-icon toggle-password-confirm cstm-show-pass"></span>
+                                        </div>
+                                    </div>
+
+                                </div>
+
+
+                                <div class="modal-footer" style="padding-right: 0;">
+                                    <button type="submit" id="SaveData_ChangePassword" class="btn btn-primary cstm-btn ml-auto mr-2 same-width-btn btn-round">Update<i class="icon-paperplane ml-2"></i></button>
+                                    <button type="button" class="btn btn-default  cstm-btnsecondary same-width-btn btn-round mr-auto" data-dismiss="modal">Close</button>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
     </div>
-    <div class="container body-content">
-        @RenderBody()
-        <hr />
-        <footer>
-            <p>&copy; @DateTime.Now.Year - My ASP.NET Application</p>
-        </footer>
-    </div>
 
-    @Scripts.Render("~/bundles/jquery")
-    @Scripts.Render("~/bundles/bootstrap")
+
+    @*  class="content" *@
+    <section>
+        <!-- Content area -->
+
+        @RenderBody()
+    </section>
+
+
     @RenderSection("scripts", required: false)
+
+    <script>
+
+        $(document).ready(function () {
+
+            $(".log-out-btn").click(function () {
+                $(".log-out-dropdown").stop().slideToggle();
+            });
+
+            $("#SaveData_ChangePassword").click(function () {
+                event.preventDefault();
+
+                if (validate('validate_data_123') == false) {
+                    AlertToast('warning', 'Please Enter Required Field(s).');
+                }
+                else {
+                    var dataobj = {
+                        CurrentPassword: $('#CurrentPassword').val(),
+                        NewPassword: $('#NewPassword').val(),
+                        ConfirmPassword: $('#ConfirmPassword').val()
+                    }
+                    var data = JSON.stringify(dataobj);
+
+                    var url = "/User/PasswordChange";
+
+                    $.ajax({
+                        url: url,
+                        data: data,
+                        type: "POST",
+                        contentType: "application/json;charset=utf-8",
+                        dataType: "json",
+                        success: function (response) {
+                        if (response.Success) {
+
+                        AlertToast('success', 'Password Updated Successfully.');
+                        $('#CurrentPassword').val("");
+                        $('#NewPassword').val("");
+                        $('#ConfirmPassword').val("");
+                        ModalCloseChangePassword();
+                        }
+                        else
+                        AlertToast('warning', response.Message);
+                        ModalCloseChangePassword();
+                        },
+                        failure: function (response) {
+                            alert("Fail");
+                        },
+                        error: function (response) {
+                            alert("Error");
+                        },
+                        complete: function () {
+                            $('#SaveData_ChangePassword').removeAttr('disabled');
+                        }
+
+                    });
+
+                }
+            });
+        });
+        $(".toggle-password-current").click(function () {
+
+            $(this).toggleClass("fa-eye fa-eye-slash");
+            var input = $('#CurrentPassword');
+            if (input.attr("type") == "password") {
+                input.attr("type", "text");
+            } else {
+                input.attr("type", "password");
+            }
+
+        });
+        $(".toggle-password-new").click(function () {
+
+            $(this).toggleClass("fa-eye fa-eye-slash");
+            var input = $('#NewPassword');
+            if (input.attr("type") == "password") {
+                input.attr("type", "text");
+            } else {
+                input.attr("type", "password");
+            }
+
+        });
+        $(".toggle-password-confirm").click(function () {
+
+            $(this).toggleClass("fa-eye fa-eye-slash");
+            var input = $('#ConfirmPassword');
+            if (input.attr("type") == "password") {
+                input.attr("type", "text");
+            } else {
+                input.attr("type", "password");
+            }
+
+        });
+
+    </script>
+
+    @RenderSection("scripts", required: false)
+
 </body>
 </html>

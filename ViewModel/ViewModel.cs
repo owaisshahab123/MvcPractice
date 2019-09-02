@@ -43,9 +43,12 @@ namespace ViewModel
             public int ID { get; set; }
             public Nullable<int> Role_ID { get; set; }
             public Nullable<bool> IsActive { get; set; }
-            public string Fisrt_Name { get; set; }
+            public string First_Name { get; set; }
             public string Last_Name { get; set; }
-            public string User_ID { get; set; }
+            public DateTime DOB { get; set; }
+            public string FatherGuardian { get; set; }
+            public int Class { get; set; }
+            public string EmailAddress { get; set; }
             public string Password { get; set; }
             public string Image { get; set; }
             public Nullable<System.DateTime> Created_At { get; set; }
@@ -55,7 +58,7 @@ namespace ViewModel
             public Nullable<System.DateTime> Deleted_At { get; set; }
             public Nullable<int> Deleted_By { get; set; }
             public Nullable<bool> IsDleteted { get; set; }
-            public string ContactNumber { get; set; }
+            public string ContactNo { get; set; }
             public string Email { get; set; }
             public bool isWeb { get; set; }
             public string DeviceToken { get; set; }

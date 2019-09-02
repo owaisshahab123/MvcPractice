@@ -198,7 +198,7 @@ namespace ViewModel.Model
         }
         public static DateTime GetCurrentDateTime()
         {
-            string TimeZoneID = "Standard Time";
+            string TimeZoneID = "Central Standard Time";
 
             DateTime dt = DateTime.Now;
             DateTime currentTime = TimeZoneInfo.ConvertTime(DateTime.Now, TimeZoneInfo.FindSystemTimeZoneById(TimeZoneID));
