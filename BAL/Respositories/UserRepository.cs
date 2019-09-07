@@ -84,5 +84,29 @@ namespace BAL.Respositories
             return DBContext.SchoolClasses.Where(x => x.IsActive == true && (x.IsDeleted == false || x.IsDeleted == null)).ToList();
         }
 
+        public List<UserProfile> GetUsers()
+        {
+            return DBContext.UserProfiles.Where(x => x.IsActive == true && (x.IsDeleted == false || x.IsDeleted == null)).ToList();
+        }
+
+        public UserProfile GetuserByID(int id)
+        {
+            return DBContext.UserProfiles.Where(x => x.ID == id).FirstOrDefault();
+        }
+
+
+        public UserProfile DeleteUser(UserProfile up)
+        {
+            var reg = DBContext.UserProfiles.Where(x => x.ID == up.ID).FirstOrDefault();
+            reg.Deleted_At = Common.GetCurrentDateTime();
+            reg.Deleted_By = up.Deleted_By;
+            reg.IsDeleted = true;
+            DBContext.UserProfiles.Attach(reg);
+            DBContext.UpdateOnly<UserProfile>(reg, x => x.Deleted_At, x => x.Deleted_By, x => x.IsDeleted
+                );
+            DBContext.SaveChanges();
+            return up;
+        }
+
     }
 }

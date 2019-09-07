@@ -21,18 +21,15 @@ namespace DAL.DBEntities
         public string Last_Name { get; set; }
         public string EmailAddress { get; set; }
         public string Password { get; set; }
-        public string Image { get; set; }
         public Nullable<System.DateTime> Created_At { get; set; }
         public Nullable<int> Created_By { get; set; }
         public Nullable<System.DateTime> Updated_At { get; set; }
         public Nullable<int> Updated_By { get; set; }
         public Nullable<System.DateTime> Deleted_At { get; set; }
         public Nullable<int> Deleted_By { get; set; }
-        public Nullable<bool> IsDleteted { get; set; }
+        public Nullable<bool> IsDeleted { get; set; }
         public string ContactNumber { get; set; }
         public string Email { get; set; }
-        public string DeviceToken { get; set; }
-        public string DeviceType { get; set; }
         public Nullable<int> Class { get; set; }
         public Nullable<System.DateTime> DOB { get; set; }
         public string FatherGuardians { get; set; }

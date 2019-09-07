@@ -25,11 +25,24 @@ namespace ViewModel
             public List<UserPermission> Permissions { get; set; }
         }
 
+        public class GetUserList
+        {
+            public APIResponseHeader Header { get; set; }
+            public List<UserProfile> UserList { get; set; }
+        }
+
 
         public class GetClassesList
         {
             public APIResponseHeader Header { get; set; }
             public List<SchoolClass> ClassesList { get; set; }
+        }
+
+        public class Users
+        {
+            public APIResponseHeader Header { get; set; }
+
+            public UserProfile User { get; set; }
         }
 
     }

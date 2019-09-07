@@ -48,7 +48,7 @@
                                 <div class="col-lg-6 col-md-6">
                                     <div class="form-group">
                                         <label><b>Date Of Birth:</b></label>
-                                        <input type="text" id="DOB" validate="validate_data" require="*Please enter Date of Birth" name="DOB" class="form-control" placeholder="Date of Birth">
+                                        <input type="date" id="DOB" validate="validate_data" require="*Please enter Date of Birth" name="DOB" class="form-control" placeholder="Date of Birth">
                                     </div>
                                 </div>
                                 <div class="col-lg-6 col-md-6">
@@ -100,6 +100,12 @@
 
     $(document).ready(function () {
         ClassesDropdown(0);
+        debugger
+        const urlParams = new URLSearchParams(window.location.search);
+        const myParam = urlParams.get('UserId');
+        if (myParam != null) {
+            UpdateUser(myParam);
+        }
     })
 
     $("#SaveUpdateForm").on("submit", function (event) {
@@ -188,5 +194,35 @@
         }
     }
 
+    function UpdateUser(id) {
+        $.ajax({
+            type: 'Get',
+            url: '/user/GetUserByID?id=' + id,
+            data: FormData,
+            success: function (response) {
+                debugger
+                response = JSON.parse(response.response)
+                $('#ID').val(response.User.ID);
+                $('#First_Name').val(response.User.First_Name);
+                $('#Last_Name').val(response.User.Last_Name)
+                $('#DOB').val(response.User.DOB)
+                $('#FatherGuardian').val(response.User.FatherGuardians)
+                $('#EmailAddress').val(response.User.EmailAddress)
+                $('#Password').val(response.User.Password)
+                //DOB
+
+            },
+            failure: function (response) {
+                alert("Fail");
+            },
+            error: function (response) {
+                alert("Error");
+            },
+            complete: function () {
+                $('#SaveData').removeAttr('disabled');
+            }
+
+        });
+    }
 
 </script>

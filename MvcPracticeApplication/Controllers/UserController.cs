@@ -8,6 +8,7 @@ using System.Web.Mvc;
 using static ViewModel.ViewModel;
 using static ViewModel.Model.HttpApi;
 using static ViewModel.VM;
+using DAL.DBEntities;
 
 namespace MvcPracticeApplication.Controllers
 {
@@ -15,6 +16,11 @@ namespace MvcPracticeApplication.Controllers
     {
         // GET: User
         public ActionResult Index()
+        {
+            return View();
+        }
+
+        public ActionResult test()
         {
             return View();
         }
@@ -27,6 +33,11 @@ namespace MvcPracticeApplication.Controllers
         #endregion Dashboard
 
         public ActionResult UserEntry()
+        {
+            return View();
+        }
+
+        public ActionResult UserList()
         {
             return View();
         }
@@ -63,6 +74,54 @@ namespace MvcPracticeApplication.Controllers
 
             return Json(new { response = STRresponse }, JsonRequestBehavior.AllowGet);
 
+        }
+
+        [HttpGet]
+        public JsonResult GetAllUsers()
+        {
+            APIRequestHeader header = new APIRequestHeader();
+            header.UserEmail = (CurrentUser.SessionUser.Email).ToString();
+            header.UserID = (CurrentUser.SessionUser.ID).ToString();
+            header.RoleID = Convert.ToInt32(CurrentUser.SessionUser.Role_ID);
+
+            string strResponse = CreateRequest(ConfigurationManager.AppSettings["APIHostDomain"].ToString() + "/api/User/GetAllUsers/", header);
+            var res = JsonConvert.DeserializeObject<GetUserList>(strResponse);
+            string STRresponse = JsonConvert.SerializeObject(res, Formatting.Indented, new JsonSerializerSettings() { DateFormatString = "dd/MM/yyyy" });
+
+            return Json(new { response = STRresponse }, JsonRequestBehavior.AllowGet);
+
+        }
+
+        [HttpGet]
+        public JsonResult GetUserByID(int id)
+        {
+            APIRequestHeader req = new APIRequestHeader();
+            req.ID = id;
+            string strResponse = CreateRequest(ConfigurationManager.AppSettings["APIHostDomain"].ToString() + "/api/User/GetUserByID/", req);
+            var res = JsonConvert.DeserializeObject<Users>(strResponse);
+            string STRresponse = JsonConvert.SerializeObject(res, Formatting.Indented, new JsonSerializerSettings() { DateFormatString = "dd/MM/yyyy" });
+            return Json(new { response = STRresponse }, JsonRequestBehavior.AllowGet);
+        }
+
+        [HttpGet]
+        public ActionResult DeleteUser(int id)
+        {
+            try
+            {
+                UserProfile User = new UserProfile();
+                User.ID = id;
+                User.Deleted_By = CurrentUser.SessionUser.ID;
+                User.IsDeleted = true;
+                string strResponse = CreateRequest(ConfigurationManager.AppSettings["APIHostDomain"].ToString() + "/api/User/DeleteUser/", User);
+
+                return Json(new { response = strResponse }, JsonRequestBehavior.AllowGet);
+
+            }
+            catch (Exception ex)
+            {
+                return Json(new { Success = false, Message = ex.Message.ToString() }, JsonRequestBehavior.AllowGet);
+
+            }
         }
     }
 }

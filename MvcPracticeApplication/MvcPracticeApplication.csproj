@@ -1023,6 +1023,8 @@
     <Content Include="Views\User\Dashboard.cshtml" />
     <Content Include="Views\User\UserEntry.cshtml" />
     <Content Include="Views\Error\Permission.cshtml" />
+    <Content Include="Views\User\UserList.cshtml" />
+    <Content Include="Views\User\test.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

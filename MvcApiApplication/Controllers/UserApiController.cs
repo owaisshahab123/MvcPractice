@@ -2,6 +2,7 @@
 using DAL.DBEntities;
 using System;
 using System.Collections.Generic;
+using System.Data;
 using System.Linq;
 using System.Web;
 using System.Web.Http;
@@ -100,6 +101,96 @@ namespace MvcApiApplication.Controllers
             Response.Header = Header;
             return Response;
         }
+
+
+        [Route("api/User/GetAllUsers")]
+        [HttpPost]
+        public GetUserList GetAllUsers(APIRequestHeader ApiResquest)
+        {
+
+            GetUserList Response = new GetUserList();
+            APIResponseHeader Header = new APIResponseHeader();
+
+            try
+            {
+                List<UserProfile> UserList = new List<UserProfile>();
+
+                UserList = userrepo.GetUsers();
+
+
+                if (UserList.Count > 0)
+                {
+                    Header.IsSuccess = true;
+                    Header.Message = "Record Found";
+                    Response.UserList = UserList;
+                }
+                else
+                {
+                    Header.IsSuccess = true;
+                    Header.Message = "Record Not Found";
+                }
+            }
+            catch (Exception ex)
+            {
+                Header.IsSuccess = false;
+                Header.Message = ex.Message;
+                userrepo.InsertError("UserApiController", "Not Known", ex.Message, ex.StackTrace, "XYZ");
+            }
+            Response.Header = Header;
+            return Response;
+        }
+
+        [Route("api/User/GetUserByID")]
+        [HttpPost]
+        public Users GetUserByID(APIRequestHeader ApiResquest)
+        {
+
+            Users Response = new Users();
+            APIResponseHeader Header = new APIResponseHeader();
+            try
+            {
+                var User = userrepo.GetuserByID(ApiResquest.ID);
+                if (User != null)
+                {
+                    Header.IsSuccess = true;
+                    Header.Message = "Record Found";
+                    Response.User = User;
+                }
+                else
+                {
+                    Header.IsSuccess = true;
+                    Header.Message = "Record Not Found";
+                    Response.User = null;
+                }
+            }
+            catch (Exception ex)
+            {
+                Header.IsSuccess = false;
+                Header.Message = ex.Message;
+            }
+            Response.Header = Header;
+            return Response;
+        }
+
+        [Route("api/User/DeleteUser")]
+        [HttpPost]
+        public APIResponseHeader DeleteUser(UserProfile up)
+        {
+            APIResponseHeader Header = new APIResponseHeader();
+            try
+            {
+                    userrepo.DeleteUser(up);
+                    Header.IsSuccess = true;
+                    Header.Message = "Record Deleted Successfully"; 
+            }
+            catch (Exception ex)
+            {
+                Header.IsSuccess = false;
+                Header.Message = ex.Message;
+            }
+            return Header;
+        }
+
 
     }
 }

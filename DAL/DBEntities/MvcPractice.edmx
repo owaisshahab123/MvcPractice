@@ -30,17 +30,8 @@
           <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="PageName" Type="varchar" MaxLength="100" />
           <Property Name="PageURL" Type="varchar" MaxLength="500" />
-          <Property Name="Order" Type="int" />
-          <Property Name="Controller" Type="varchar" MaxLength="250" />
           <Property Name="Role" Type="int" Nullable="false" />
           <Property Name="IsActive" Type="bit" />
-          <Property Name="CreatedDate" Type="datetime" />
-          <Property Name="CreatedBy" Type="int" />
-          <Property Name="UpdatedDate" Type="datetime" />
-          <Property Name="UpdatedBy" Type="int" />
-          <Property Name="DeletedDate" Type="datetime" />
-          <Property Name="DeletedBy" Type="int" />
-          <Property Name="UserID" Type="int" />
         </EntityType>
         <EntityType Name="UserProfile">
           <Key>
@@ -53,18 +44,15 @@
           <Property Name="Last_Name" Type="nvarchar" MaxLength="500" />
           <Property Name="EmailAddress" Type="nvarchar" MaxLength="500" />
           <Property Name="Password" Type="nvarchar" MaxLength="500" />
-          <Property Name="Image" Type="nvarchar" MaxLength="500" />
           <Property Name="Created_At" Type="datetime" />
           <Property Name="Created_By" Type="int" />
           <Property Name="Updated_At" Type="datetime" />
           <Property Name="Updated_By" Type="int" />
           <Property Name="Deleted_At" Type="datetime" />
           <Property Name="Deleted_By" Type="int" />
-          <Property Name="IsDleteted" Type="bit" />
+          <Property Name="IsDeleted" Type="bit" />
           <Property Name="ContactNumber" Type="nvarchar" MaxLength="100" />
           <Property Name="Email" Type="varchar" MaxLength="100" />
-          <Property Name="DeviceToken" Type="nvarchar" MaxLength="500" />
-          <Property Name="DeviceType" Type="nvarchar" MaxLength="500" />
           <Property Name="Class" Type="int" />
           <Property Name="DOB" Type="datetime" />
           <Property Name="FatherGuardians" Type="nvarchar" MaxLength="50" />
@@ -110,17 +98,8 @@
           <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="PageName" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
           <Property Name="PageURL" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
-          <Property Name="Order" Type="Int32" />
-          <Property Name="Controller" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
           <Property Name="Role" Type="Int32" Nullable="false" />
           <Property Name="IsActive" Type="Boolean" />
-          <Property Name="CreatedDate" Type="DateTime" Precision="3" />
-          <Property Name="CreatedBy" Type="Int32" />
-          <Property Name="UpdatedDate" Type="DateTime" Precision="3" />
-          <Property Name="UpdatedBy" Type="Int32" />
-          <Property Name="DeletedDate" Type="DateTime" Precision="3" />
-          <Property Name="DeletedBy" Type="Int32" />
-          <Property Name="UserID" Type="Int32" />
         </EntityType>
         <EntityType Name="UserProfile">
           <Key>
@@ -133,18 +112,15 @@
           <Property Name="Last_Name" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
           <Property Name="EmailAddress" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
           <Property Name="Password" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
-          <Property Name="Image" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
           <Property Name="Created_At" Type="DateTime" Precision="3" />
           <Property Name="Created_By" Type="Int32" />
           <Property Name="Updated_At" Type="DateTime" Precision="3" />
           <Property Name="Updated_By" Type="Int32" />
           <Property Name="Deleted_At" Type="DateTime" Precision="3" />
           <Property Name="Deleted_By" Type="Int32" />
-          <Property Name="IsDleteted" Type="Boolean" />
+          <Property Name="IsDeleted" Type="Boolean" />
           <Property Name="ContactNumber" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
           <Property Name="Email" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
-          <Property Name="DeviceToken" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
-          <Property Name="DeviceType" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
           <Property Name="Class" Type="Int32" />
           <Property Name="DOB" Type="DateTime" Precision="3" />
           <Property Name="FatherGuardians" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
@@ -178,17 +154,8 @@
           <EntitySetMapping Name="UserPermissions">
             <EntityTypeMapping TypeName="MvcPracticeModel.UserPermission">
               <MappingFragment StoreEntitySet="UserPermission">
-                <ScalarProperty Name="UserID" ColumnName="UserID" />
-                <ScalarProperty Name="DeletedBy" ColumnName="DeletedBy" />
-                <ScalarProperty Name="DeletedDate" ColumnName="DeletedDate" />
-                <ScalarProperty Name="UpdatedBy" ColumnName="UpdatedBy" />
-                <ScalarProperty Name="UpdatedDate" ColumnName="UpdatedDate" />
-                <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
-                <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
                 <ScalarProperty Name="IsActive" ColumnName="IsActive" />
                 <ScalarProperty Name="Role" ColumnName="Role" />
-                <ScalarProperty Name="Controller" ColumnName="Controller" />
-                <ScalarProperty Name="Order" ColumnName="Order" />
                 <ScalarProperty Name="PageURL" ColumnName="PageURL" />
                 <ScalarProperty Name="PageName" ColumnName="PageName" />
                 <ScalarProperty Name="ID" ColumnName="ID" />
@@ -201,18 +168,15 @@
                 <ScalarProperty Name="FatherGuardians" ColumnName="FatherGuardians" />
                 <ScalarProperty Name="DOB" ColumnName="DOB" />
                 <ScalarProperty Name="Class" ColumnName="Class" />
-                <ScalarProperty Name="DeviceType" ColumnName="DeviceType" />
-                <ScalarProperty Name="DeviceToken" ColumnName="DeviceToken" />
                 <ScalarProperty Name="Email" ColumnName="Email" />
                 <ScalarProperty Name="ContactNumber" ColumnName="ContactNumber" />
-                <ScalarProperty Name="IsDleteted" ColumnName="IsDleteted" />
+                <ScalarProperty Name="IsDeleted" ColumnName="IsDeleted" />
                 <ScalarProperty Name="Deleted_By" ColumnName="Deleted_By" />
                 <ScalarProperty Name="Deleted_At" ColumnName="Deleted_At" />
                 <ScalarProperty Name="Updated_By" ColumnName="Updated_By" />
                 <ScalarProperty Name="Updated_At" ColumnName="Updated_At" />
                 <ScalarProperty Name="Created_By" ColumnName="Created_By" />
                 <ScalarProperty Name="Created_At" ColumnName="Created_At" />
-                <ScalarProperty Name="Image" ColumnName="Image" />
                 <ScalarProperty Name="Password" ColumnName="Password" />
                 <ScalarProperty Name="EmailAddress" ColumnName="EmailAddress" />
                 <ScalarProperty Name="Last_Name" ColumnName="Last_Name" />
