@@ -12,7 +12,7 @@ namespace ViewModel
         {
             public int ID { get; set; }
             public string SerialNo { get; set; }
-            public string UserID { get; set; }
+            public int UserID { get; set; }
             public int RoleID { get; set; }
             public string UserEmail { get; set; }
             public string Password { get; set; }
@@ -63,6 +63,14 @@ namespace ViewModel
             public bool isWeb { get; set; }
             public string DeviceToken { get; set; }
             public string DeviceType { get; set; }
+        }
+
+        public partial class FrontEndErrorCustom
+        {
+            public string view { get; set; }
+            public string message { get; set; }
+            public string stack { get; set; }
+            public int UserID { get; set; }
         }
     }
 }

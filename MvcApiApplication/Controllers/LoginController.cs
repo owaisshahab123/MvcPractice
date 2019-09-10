@@ -38,20 +38,12 @@ namespace MvcApiApplication.Controllers
             {
                 var user = loginrepo.GetUserProfile(User.EmailAddress, User.Password);
 
-                if (user != null)
-                {
-                    if (User.DeviceToken != null && User.DeviceToken != "" && User.DeviceType != null && User.DeviceType != "")
-                    {
-
-                    }
-                }
-
                 if (User.isWeb == true)
                 {
 
                     if (user != null)
                     {
-
+                        loginrepo.InsertEntryExitLogs(user.ID, true, "Enter");
                         Cpmmonsession.AccessToken = "abc";
                         Header.AccessToken = "abc";
                         Header.IsSuccess = true;
@@ -63,7 +55,7 @@ namespace MvcApiApplication.Controllers
                     {
                         Header.IsSuccess = false;
                         Header.Message = "Record Not Found";
-
+                        loginrepo.InsertEntryExitLogs(user.ID, false, "Enter");
                     }
 
 
@@ -129,5 +121,28 @@ namespace MvcApiApplication.Controllers
             return Response;
         }
 
+
+        [Route("api/Login/LogoutLogs")]
+        [HttpPost]
+        public GetLoginResponse LogoutLogs(UserProfileCustom User)
+        {
+
+            GetLoginResponse Response = new GetLoginResponse();
+
+            APIResponseHeader Header = new APIResponseHeader();
+            try
+            {
+
+                loginrepo.InsertEntryExitLogs(User.ID, true, "Exit");
+
+            }
+            catch (Exception)
+            {
+                Header.IsSuccess = false;
+                Header.Message = "Exception occured when logout.";
+            }
+            Response.Header = Header;
+            return Response;
+        }
     }
 }

@@ -1,10 +1,12 @@
 ﻿using DAL.DBEntities;
 using System;
 using System.Collections.Generic;
+using System.Data.SqlClient;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using ViewModel.Model;
+using static ViewModel.ViewModel;
 
 namespace BAL.Respositories
 {
@@ -35,8 +37,6 @@ namespace BAL.Respositories
         }
         public UserProfile GetUserContractorProfileByRoleID(string UName, string pass, int roleid)
         {
-            //ErrorHandling.WriteError("DBContext:"+ DBContext.Database.Connection.ConnectionString);
-            // int contrID = vt_Common.Contractor_ID();
             var password = Common.Encrypt(pass);
             return DBContext.UserProfiles.Where(x => x.IsActive == true && x.Deleted_At == null && x.First_Name.Trim().ToLower().Replace(" ", "") == UName.Trim().ToLower().Replace(" ", "") && x.Password == password && x.Role_ID == roleid).FirstOrDefault();
         }
@@ -49,17 +49,18 @@ namespace BAL.Respositories
 
         public List<UserPermission> GetUserPermission(int UserID, int RoleID)
         {
-            //var abc = DBContext.vt_UserPermissions.Where(x => x.UserID == UserID).ToList();
+            return DBContext.UserPermissions.Where(x => x.Role == RoleID).ToList();
+        }
 
-            //if ()
-            //{
-            //    return DBContext.UserPermissions.Where(x => x.ID == UserID).ToList();
-            //}
+        public void InsertEntryExitLogs(int UserID,bool Status,string EntryExitCheck)
+        {
+            SqlParameter[] Pram = {
+                 new SqlParameter("@UserID",UserID)
+                ,new SqlParameter("@Status",Status)
+                ,new SqlParameter("@EntryExitCheck",EntryExitCheck)
+            };
 
-
-                return DBContext.UserPermissions.Where(x => x.Role == RoleID).ToList();
-
-
+            var result = Entity_Common.get_Scalar(DBContext, "InsertEntryExitLogs", Pram);
         }
     }
 }

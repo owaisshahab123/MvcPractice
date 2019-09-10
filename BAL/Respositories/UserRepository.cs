@@ -35,18 +35,16 @@ namespace BAL.Respositories
             DBContext = ContextDB;
         }
 
-        public void InsertError(string page, string ErrorType, string Error, string StackTrace, string LoginUser)
+        public void InsertError(string ErrorMsg, string StackTrace, int LoginUser, string Location)
         {
             SqlParameter[] Pram = {
-                 //new SqlParameter("@ID",SPT.ID)
-                 new SqlParameter("@Page",page)
-                ,new SqlParameter("@ErrorType",ErrorType)
-                ,new SqlParameter("@Error",Error)
-                ,new SqlParameter("@Stack_Trace",StackTrace)
+                 new SqlParameter("@ErrorMsg",ErrorMsg)
+                ,new SqlParameter("@StackTrace",StackTrace)
                 ,new SqlParameter("@LoginUser",LoginUser)
+                ,new SqlParameter("@Location",Location)
             };
 
-            var AssignTask_ID = Entity_Common.get_Scalar(DBContext, "insert_error_logs", Pram);
+            var result = Entity_Common.get_Scalar(DBContext, "InsertErrorLogs", Pram);
 
         }
 
@@ -82,6 +80,11 @@ namespace BAL.Respositories
         public List<SchoolClass> GetAllClasses()
         {
             return DBContext.SchoolClasses.Where(x => x.IsActive == true && (x.IsDeleted == false || x.IsDeleted == null)).ToList();
+        }
+
+        public List<ErrorLog> GetErrorList()
+        {
+            return DBContext.ErrorLogs.OrderByDescending(x => x.ID).ToList();
         }
 
         public List<UserProfile> GetUsers()

@@ -57,7 +57,7 @@ namespace MvcPracticeApplication.Controllers
                     sess.SessionUser = loginRes.User;
                     sess.pagelist = loginRes.Permissions;
                     Session.Add("Session", sess);
-                    Session.Timeout = 600;
+                    Session.Timeout = 1800;
                     if (loginRes.User.Role_ID == Common.SuperAdmin_ID())
                     {
                         url = "/User/UserEntry";
@@ -79,6 +79,11 @@ namespace MvcPracticeApplication.Controllers
 
         public ActionResult Logout()
         {
+            UserProfileCustom upc = new UserProfileCustom();
+            Session sess = (Session)Session["Session"];
+            object obj = new object();
+            upc.ID = sess.SessionUser.ID;
+            string strResponse = CreateRequest(ConfigurationManager.AppSettings["APIHostDomain"].ToString() + "/api/Login/LogoutLogs/", upc);
             FormsAuthentication.SignOut();
             Session.Abandon();
             Session.Add("Session", null);

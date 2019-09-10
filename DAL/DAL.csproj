@@ -63,6 +63,12 @@
   <ItemGroup>
     <Compile Include="DBEntities\DBContext.cs" />
     <Compile Include="DBEntities\Entity_Common.cs" />
+    <Compile Include="DBEntities\EntryExitLog.cs">
+      <DependentUpon>MvcPractice.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DBEntities\ErrorLog.cs">
+      <DependentUpon>MvcPractice.tt</DependentUpon>
+    </Compile>
     <Compile Include="DBEntities\MvcPractice.Context.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>

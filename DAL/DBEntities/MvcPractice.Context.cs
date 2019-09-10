@@ -12,6 +12,8 @@ namespace DAL.DBEntities
     using System;
     using System.Data.Entity;
     using System.Data.Entity.Infrastructure;
+    using System.Data.Entity.Core.Objects;
+    using System.Linq;
     
     public partial class MvcPracticeEntities : DbContext
     {
@@ -25,9 +27,32 @@ namespace DAL.DBEntities
             throw new UnintentionalCodeFirstException();
         }
     
+        public virtual DbSet<EntryExitLog> EntryExitLogs { get; set; }
+        public virtual DbSet<ErrorLog> ErrorLogs { get; set; }
         public virtual DbSet<Role> Roles { get; set; }
         public virtual DbSet<SchoolClass> SchoolClasses { get; set; }
         public virtual DbSet<UserPermission> UserPermissions { get; set; }
         public virtual DbSet<UserProfile> UserProfiles { get; set; }
+    
+        public virtual int InsertErrorLogs(string errorMsg, string stackTrace, Nullable<int> loginUser, string location)
+        {
+            var errorMsgParameter = errorMsg != null ?
+                new ObjectParameter("ErrorMsg", errorMsg) :
+                new ObjectParameter("ErrorMsg", typeof(string));
+    
+            var stackTraceParameter = stackTrace != null ?
+                new ObjectParameter("StackTrace", stackTrace) :
+                new ObjectParameter("StackTrace", typeof(string));
+    
+            var loginUserParameter = loginUser.HasValue ?
+                new ObjectParameter("LoginUser", loginUser) :
+                new ObjectParameter("LoginUser", typeof(int));
+    
+            var locationParameter = location != null ?
+                new ObjectParameter("Location", location) :
+                new ObjectParameter("Location", typeof(string));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("InsertErrorLogs", errorMsgParameter, stackTraceParameter, loginUserParameter, locationParameter);
+        }
     }
 }

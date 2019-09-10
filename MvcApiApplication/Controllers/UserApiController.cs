@@ -29,6 +29,11 @@ namespace MvcApiApplication.Controllers
             APIResponseHeader Header = new APIResponseHeader();
             try
             {
+                int abc = 0;
+                string abcd = string.Empty;
+                abcd = "testing";
+                abc = Convert.ToInt32(abcd);
+
                 UserProfile up = new UserProfile();
                 up.ContactNumber = upc.ContactNo;
                 up.First_Name = upc.First_Name;
@@ -59,7 +64,7 @@ namespace MvcApiApplication.Controllers
             {
                 //Header.IsSuccess = false;
                 //Header.Message = ex.Message;
-                userrepo.InsertError("UserApiController", "Not Known", ex.Message, ex.StackTrace, "XYZ");
+                userrepo.InsertError(ex.Message,ex.StackTrace,upc.ID, "UserApiController_CreateAndModifyUserEntry");
             }
             return Header;
         }
@@ -102,6 +107,46 @@ namespace MvcApiApplication.Controllers
             return Response;
         }
 
+        [Route("api/User/GetErrorLogs")]
+        [HttpPost]
+        public GetErrorList GetErrorLogs(APIRequestHeader ApiResquest)
+        {
+
+            GetErrorList Response = new GetErrorList();
+
+            APIResponseHeader Header = new APIResponseHeader();
+
+            try
+            {
+                List<ErrorLog> Error_List = new List<ErrorLog>();
+                if (ApiResquest.RoleID == 1)
+                {
+                    Error_List = userrepo.GetErrorList();
+                }
+
+
+                if (Error_List.Count > 0)
+                {
+                    Header.IsSuccess = true;
+                    Header.Message = "Record Found";
+                    Response.ErrorList = Error_List;
+                }
+                else
+                {
+                    Header.IsSuccess = true;
+                    Header.Message = "Record Not Found";
+                }
+            }
+            catch (Exception ex)
+            {
+                Header.IsSuccess = false;
+                Header.Message = ex.Message;
+                userrepo.InsertError(ex.Message, ex.StackTrace,ApiResquest.UserID , "UserApiController_GetErrorLogs");
+            }
+            Response.Header = Header;
+            return Response;
+        }
+
 
         [Route("api/User/GetAllUsers")]
         [HttpPost]
@@ -134,7 +179,7 @@ namespace MvcApiApplication.Controllers
             {
                 Header.IsSuccess = false;
                 Header.Message = ex.Message;
-                userrepo.InsertError("UserApiController", "Not Known", ex.Message, ex.StackTrace, "XYZ");
+                userrepo.InsertError(ex.Message, ex.StackTrace,ApiResquest.UserID, "UserApiController_GetAllUsers");
             }
             Response.Header = Header;
             return Response;
@@ -191,6 +236,25 @@ namespace MvcApiApplication.Controllers
             return Header;
         }
 
+
+        [Route("api/User/FrontEndErrorLogs")]
+        [HttpPost]
+        public APIResponseHeader FrontEndErrorLogs(FrontEndErrorCustom error)
+        {
+            APIResponseHeader Header = new APIResponseHeader();
+            try
+            {
+                userrepo.InsertError(error.message,error.stack,error.UserID,error.view);
+                Header.IsSuccess = true;
+                Header.Message = "Log entered Successfully";
+            }
+            catch (Exception ex)
+            {
+                Header.IsSuccess = false;
+                Header.Message = ex.Message;
+            }
+            return Header;
+        }
 
     }
 }

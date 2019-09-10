@@ -57,3 +57,27 @@ function GetAllClasses() {
     });
     return ResoponseData;
 }
+
+function FrontEndErrorLogs(view, message) {
+    debugger;
+    $.ajax({
+        type: 'Get',
+        url: '/user/FrontEndErrorLogs?view=' + view + '&message=' + message,
+        data: FormData,
+        success: function (response) {
+            debugger
+            response = JSON.parse(response.response)
+
+        },
+        failure: function (response) {
+            alert("Fail");
+        },
+        error: function (response) {
+            alert("Error");
+        },
+        complete: function () {
+            $('#SaveData').removeAttr('disabled');
+        }
+
+    });
+}

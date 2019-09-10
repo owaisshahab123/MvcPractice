@@ -25,6 +25,11 @@ namespace MvcPracticeApplication.Controllers
             return View();
         }
 
+        public ActionResult ErrorLogs()
+        {
+            return View();
+        }
+
         #region Dashboard
         public ActionResult DashBoard()
         {
@@ -48,6 +53,7 @@ namespace MvcPracticeApplication.Controllers
             try
             {
                 upc.Created_At = DateTime.Now;
+                upc.ID = CurrentUser.SessionUser.ID;
                 string strResponse = CreateRequest(ConfigurationManager.AppSettings["APIHostDomain"].ToString() + "api/User/CreateAndModifyUserEntry/", upc);
                 var res = JsonConvert.DeserializeObject<APIResponseHeader>(strResponse);
                 return Json(new { Success = res.IsSuccess, Message = res.Message }, JsonRequestBehavior.AllowGet);
@@ -65,7 +71,7 @@ namespace MvcPracticeApplication.Controllers
         {
             APIRequestHeader header = new APIRequestHeader();
             header.UserEmail = (CurrentUser.SessionUser.Email).ToString();
-            header.UserID = (CurrentUser.SessionUser.ID).ToString();
+            header.UserID = CurrentUser.SessionUser.ID;
             header.RoleID = Convert.ToInt32(CurrentUser.SessionUser.Role_ID);
 
             string strResponse = CreateRequest(ConfigurationManager.AppSettings["APIHostDomain"].ToString() + "/api/User/GetAllClasses/", header);
@@ -77,11 +83,27 @@ namespace MvcPracticeApplication.Controllers
         }
 
         [HttpGet]
+        public JsonResult GetErrorLogs()
+        {
+            APIRequestHeader header = new APIRequestHeader();
+            header.UserEmail = (CurrentUser.SessionUser.Email).ToString();
+            header.UserID = CurrentUser.SessionUser.ID;
+            header.RoleID = Convert.ToInt32(CurrentUser.SessionUser.Role_ID);
+
+            string strResponse = CreateRequest(ConfigurationManager.AppSettings["APIHostDomain"].ToString() + "/api/User/GetErrorLogs/", header);
+            var res = JsonConvert.DeserializeObject<GetErrorList>(strResponse);
+            string STRresponse = JsonConvert.SerializeObject(res, Formatting.Indented, new JsonSerializerSettings() { DateFormatString = "dd/MM/yyyy" });
+
+            return Json(new { response = STRresponse }, JsonRequestBehavior.AllowGet);
+
+        }
+
+        [HttpGet]
         public JsonResult GetAllUsers()
         {
             APIRequestHeader header = new APIRequestHeader();
             header.UserEmail = (CurrentUser.SessionUser.Email).ToString();
-            header.UserID = (CurrentUser.SessionUser.ID).ToString();
+            header.UserID = CurrentUser.SessionUser.ID;
             header.RoleID = Convert.ToInt32(CurrentUser.SessionUser.Role_ID);
 
             string strResponse = CreateRequest(ConfigurationManager.AppSettings["APIHostDomain"].ToString() + "/api/User/GetAllUsers/", header);
@@ -97,6 +119,7 @@ namespace MvcPracticeApplication.Controllers
         {
             APIRequestHeader req = new APIRequestHeader();
             req.ID = id;
+            req.UserID = CurrentUser.SessionUser.ID;
             string strResponse = CreateRequest(ConfigurationManager.AppSettings["APIHostDomain"].ToString() + "/api/User/GetUserByID/", req);
             var res = JsonConvert.DeserializeObject<Users>(strResponse);
             string STRresponse = JsonConvert.SerializeObject(res, Formatting.Indented, new JsonSerializerSettings() { DateFormatString = "dd/MM/yyyy" });
@@ -113,6 +136,28 @@ namespace MvcPracticeApplication.Controllers
                 User.Deleted_By = CurrentUser.SessionUser.ID;
                 User.IsDeleted = true;
                 string strResponse = CreateRequest(ConfigurationManager.AppSettings["APIHostDomain"].ToString() + "/api/User/DeleteUser/", User);
+
+                return Json(new { response = strResponse }, JsonRequestBehavior.AllowGet);
+
+            }
+            catch (Exception ex)
+            {
+                return Json(new { Success = false, Message = ex.Message.ToString() }, JsonRequestBehavior.AllowGet);
+
+            }
+        }
+
+        [HttpGet]
+        public ActionResult FrontEndErrorLogs(string view,string message,string stack)
+        {
+            try
+            {
+                FrontEndErrorCustom error = new FrontEndErrorCustom();
+                error.view = view;
+                error.message = message;
+                error.stack = "FrontEnd";
+                error.UserID = CurrentUser.SessionUser.ID;
+                string strResponse = CreateRequest(ConfigurationManager.AppSettings["APIHostDomain"].ToString() + "/api/User/FrontEndErrorLogs/", error);
 
                 return Json(new { response = strResponse }, JsonRequestBehavior.AllowGet);
 

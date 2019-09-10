@@ -5,10 +5,12 @@
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
       <Diagram DiagramId="01b0eb1b8ece4a98ac9ccb974df86f4b" Name="Diagram1" ZoomLevel="74">
-        <EntityTypeShape EntityType="MvcPracticeModel.Role" Width="1.5" PointX="0.75" PointY="0.75" />
-        <EntityTypeShape EntityType="MvcPracticeModel.SchoolClass" Width="1.5" PointX="2.75" PointY="0.75" />
-        <EntityTypeShape EntityType="MvcPracticeModel.UserPermission" Width="1.5" PointX="0.75" PointY="3.75" />
-        <EntityTypeShape EntityType="MvcPracticeModel.UserProfile" Width="1.5" PointX="2.75" PointY="3.75" />
+        <EntityTypeShape EntityType="MvcPracticeModel.EntryExitLog" Width="1.5" PointX="0.75" PointY="0.75" />
+        <EntityTypeShape EntityType="MvcPracticeModel.ErrorLog" Width="1.5" PointX="2.75" PointY="0.75" />
+        <EntityTypeShape EntityType="MvcPracticeModel.Role" Width="1.5" PointX="4.75" PointY="0.75" />
+        <EntityTypeShape EntityType="MvcPracticeModel.SchoolClass" Width="1.5" PointX="0.75" PointY="4.75" />
+        <EntityTypeShape EntityType="MvcPracticeModel.UserPermission" Width="1.5" PointX="2.75" PointY="4.75" />
+        <EntityTypeShape EntityType="MvcPracticeModel.UserProfile" Width="1.5" PointX="4.75" PointY="3.75" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

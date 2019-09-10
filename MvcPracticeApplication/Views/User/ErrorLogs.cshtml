@@ -1,0 +1,159 @@
+﻿
+
+@{
+
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+@{
+    ViewModel.Model.Session sess = new ViewModel.Model.Session();
+    sess = (ViewModel.Model.Session)HttpContext.Current.Session["Session"];
+}
+<script src="~/Scripts/CommonList.js"></script>
+
+<!-- Content area -->
+<input id="delete_id" type="hidden" />
+
+<div class="container-fluid">
+
+    <!-- Exportable Table -->
+    <div class="row clearfix">
+        <div class="col-lg-12">
+            <div class="card">
+                <div class="body">
+                    <div class="table table-bordered table-striped table-hover dataTable js-exportable">
+                        <div id="dataGrid" class="js-exportable" style="width:100%"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- /content area -->
+    <div id="myModal" tabindex="-1" aria-modal="true" class="modal modal-adminpro-general default-popup-PrimaryModal fade bounceIn animated in" role="dialog">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h4 class="modal-title card-title">
+                        Add New
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </h4>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+
+
+
+<script>
+        $(document).ready(function () {
+
+            GetErrorRecords();
+
+        });
+        function GetErrorRecords() {
+            var url = "/User/GetErrorLogs";
+            $.ajax({
+                url: url,
+                method: "Get",
+                data: {},
+                async: false,
+                cache: false,
+            }).done(function (result) {
+                debugger;
+                result = JSON.parse(result.response)
+                var JSON_Data = result.ErrorList;
+                if (JSON_Data.length !== 0) {
+                    dataGrid = $("#dataGrid").dxDataGrid({
+                        dataSource: JSON_Data,
+                        columnsAutoWidth: true,
+                        showBorders: true,
+                        filterRow: {
+                            visible: true,
+                            applyFilter: "auto"
+                        },
+                        headerFilter: {
+                            visible: true
+                        },
+                        paging: {
+                            pageSize: 8
+                        },
+                        onCellPrepared: function (e, options) {
+
+                            if (e.rowType == 'data') {
+                                if (e.column.dataField == 'IsActive' && e.data.IsActive == true) {
+                                    e.cellElement.addClass('DevExtrCellGreen');
+                                }
+                                if (e.column.dataField == 'IsActive' && e.data.IsActive == false) {
+                                    e.cellElement.addClass('DevExtrCellRed');
+                                }
+                            }
+                        },
+                        columns:
+                            [
+                                    {
+                                        dataField: "ID",
+                                        caption: "ID",
+                                        dataType: "int",
+                                        width: "auto"
+
+                                    },
+                                    {
+                                        dataField: "ErrorMsg",
+                                        caption: "ErrorMsg",
+                                        dataType: "string",
+                                        width: "auto"
+
+                                    },
+                                    {
+                                        dataField: "Location",
+                                        caption: "Location",
+                                        dataType: "string",
+                                        width: "auto"
+
+                                    },
+                                    {
+                                        dataField: "LoginUser",
+                                        caption: "LoginUser",
+                                        dataType: "string",
+                                        width: "auto"
+
+                                    },
+                                    {
+                                        dataField: "CreatedDateTime",
+                                        caption: "CreatedDateTime",
+                                        dataType: "string",
+                                        width: "auto"
+
+                                    },
+                                    {
+                                        dataField: "StackTrace",
+                                        caption: "StackTrace",
+                                        dataType: "date",
+                                        width: "auto"
+
+                                    }
+
+
+                            ],
+
+                    });
+
+                }
+                else {
+                    $("#dvBtn").css('display', 'none');
+                    AlertToast('warning', 'No record found.');
+                }
+
+            }).fail(function () {
+            });
+
+        }
+
+
+</script>
+

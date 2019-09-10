@@ -38,6 +38,12 @@ namespace ViewModel
             public List<SchoolClass> ClassesList { get; set; }
         }
 
+        public class GetErrorList
+        {
+            public APIResponseHeader Header { get; set; }
+            public List<ErrorLog> ErrorList { get; set; }
+        }
+
         public class Users
         {
             public APIResponseHeader Header { get; set; }
