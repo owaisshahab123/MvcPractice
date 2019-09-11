@@ -29,10 +29,10 @@ namespace MvcApiApplication.Controllers
             APIResponseHeader Header = new APIResponseHeader();
             try
             {
-                int abc = 0;
-                string abcd = string.Empty;
-                abcd = "testing";
-                abc = Convert.ToInt32(abcd);
+                //int abc = 0;
+                //string abcd = string.Empty;
+                //abcd = "testing";
+                //abc = Convert.ToInt32(abcd);
 
                 UserProfile up = new UserProfile();
                 up.ContactNumber = upc.ContactNo;
